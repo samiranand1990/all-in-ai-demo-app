@@ -2,7 +2,9 @@ import random
 
 import dash_chart_editor as dce
 import dash_mantine_components as dmc
-import openai
+from openai import OpenAI
+
+client = OpenAI()
 import pandas as pd
 from dash import Input, Output, State, callback, dcc, html, no_update, register_page
 
@@ -89,9 +91,7 @@ def chat_window(n_clicks, data, question, cur):
 
     prompt = utils.generate_prompt(df, question)
 
-    completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}]
-    )
+    completion = client.chat.completions.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}])
 
     question = [
         dcc.Markdown(

@@ -4,7 +4,9 @@ import pickle
 import dash
 import dash_bootstrap_components as dbc
 import dash_mantine_components as dmc
-import openai
+from openai import OpenAI
+
+client = OpenAI()
 from dash import dcc, html
 
 from constants import redis_instance
@@ -26,10 +28,8 @@ def layout(layout=None):
         f"There should be {len(figures)} charts to follow:\n\n\n"
     )
 
-    completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": question + json.dumps(figures)[0:3900]}],
-    )
+    completion = client.chat.completions.create(model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": question + json.dumps(figures)[0:3900]}])
 
     response = dcc.Markdown(completion.choices[0].message.content)
 
