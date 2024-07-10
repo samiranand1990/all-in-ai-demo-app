@@ -1,9 +1,9 @@
-dash
-dash-mantine-components
-dash-bootstrap-components
-gunicorn
-pandas
-dash-chart-editor
-openai
+dash==2.17.1
+dash-mantine-components==0.13.0a2
+dash-bootstrap-components==1.6.0
+gunicorn==22.0.0
+pandas==2.0.3
+dash-chart-editor==0.0.1a5
+openai==1.35.10
 dash-ag-grid
-redis
+redis==5.0.7
